@@ -1,0 +1,49 @@
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            def releasesRepoUrl = "https://packages.aliyun.com/maven/repository/2179211-release-q6rHUl"
+            def snapshotsRepoUrl = "https://packages.aliyun.com/maven/repository/2179211-release-q6rHUl"
+            def url = version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+            repository(url: url) {
+                authentication(userName: "61e52e74ae805dbacc41df09", password: "SEZzV=-UWw9p")
+            }
+
+            pom.project {
+                groupId "com.haohua.plugin.mixed"
+                artifactId "plugin"
+                version "1.1.3.4"
+//            packaging maven_pom_countly_packaging
+                description "mixed plugin"
+            }
+        }
+    }
+}
+
+
+//    repositories {
+//        maven {
+//            // change to point to your repo, e.g. http://my.org/repo
+//            allowInsecureProtocol = true
+////            repository(url: 'https://packages.aliyun.com/maven/repository/2179211-release-q6rHUl') {
+////                authentication(userName: '61e52e74ae805dbacc41df09', password: 'SEZzV=-UWw9p')
+////            }
+//            url = "https://packages.aliyun.com/maven/repository/2179211-release-q6rHUl"
+//            credentials {
+//                username = '61e52e74ae805dbacc41df09'
+//                password = 'SEZzV=-UWw9p'
+//            }
+//        }
+//    }
+//
+//    publications {
+//        maven(MavenPublication) {
+//            groupId = 'com.haohua.plugin.mixed'
+//            artifactId = 'plugin'
+//            version = '1.1.3.3'
+//
+//            // Applies the component for the debug build variant.
+//            from components.java
+//        }
+//    }

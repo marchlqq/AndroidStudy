@@ -1,0 +1,50 @@
+apply plugin: 'maven-publish'
+
+def GroupId = 'com.haohua.plugin.mixed'
+def ArtifactId = 'plugin'
+def Version = '1.1.3.5'
+
+def userName = "61e52e74ae805dbacc41df09"
+def passWord = "SEZzV=-UWw9p"
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.java
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = GroupId
+                artifactId = ArtifactId
+                version = Version
+
+                pom {
+                    name = "plugin mixed"
+                    description = "plugin"
+                    url = 'https://github.com/marchlqq/AndroidStudy'
+                }
+            }
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.java
+
+                groupId = GroupId
+                artifactId = ArtifactId
+                version = Version
+            }
+        }
+
+        repositories {
+            maven {
+                def releasesRepoUrl = "https://packages.aliyun.com/maven/repository/2179211-release-q6rHUl"
+                def snapshotsRepoUrl = "https://packages.aliyun.com/maven/repository/2179211-release-q6rHUl"
+                url = Version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username = userName
+                    password = passWord
+                }
+            }
+        }
+    }
+}
